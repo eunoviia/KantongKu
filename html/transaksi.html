@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Transaksi - KantongKu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e8f5e9, #ffffff);
+      color: #333;
+    }
+
+    .navbar {
+      background: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 40px;
+      height: auto;
+    }
+
+    .navbar-left h1 {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .navbar-right a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      margin-right: 15px;
+    }
+
+    .btn-logout {
+      background-color: #4F7351;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-logout:hover {
+      background-color: #2f6b4a;
+    }
+
+    .navbar-right a:hover {
+      color: #3c8c66;
+    }
+
+    .form-container {
+      background: white;
+      margin: 30px auto;
+      padding: 30px 20px;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .form-title {
+      background-color: #80B495;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 1.5em;
+      border-radius: 15px;
+      margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 1em;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+      .thead-pemasukan {
+      background-color: #D0E5D9;
+      font-weight: bold;
+    }
+
+    .thead-pengeluaran {
+      background-color: #E7DBB4;
+      font-weight: bold;
+    }
+
+
+    tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .btn-kembali {
+      display: block;
+      width: fit-content;
+      margin: 30px auto 60px auto;
+      text-align: center;
+      text-decoration: none;
+      background-color: #4F7351;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-kembali:hover {
+      background-color: #3c8c66;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-left h1 {
+        font-size: 1em;
+      }
+      .form-title {
+        font-size: 1.2em;
+      }
+    }
+    .btn-hapus {
+    background-color: transparent;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .btn-hapus:hover {
+    color: #c0392b;
+  }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <img src="../image/Logo1.png" alt="Logo" class="logo">
+      <h1 id="user-name">Halo, user!</h1>
+    </div>
+    <nav class="navbar-right">
+      <a href="menu.html">Home</a>
+      <a href="transaksi.html">Transaksi</a>
+      <a href="statistik.html">Statistik</a>
+      <a href="homecitacita.html">Cita-cita</a>
+      <button class="btn-logout">Keluar</button>
+    </nav>
+  </header>
+
+  <!-- Tabel Pemasukan -->
+  <section class="form-container">
+    <h2 class="form-title">Riwayat Pemasukan</h2>
+    <div style="overflow-x:auto;">
+      <table id="tabelPemasukan">
+        <thead class="thead-pemasukan">
+          <tr>
+            <th>Nominal</th>
+            <th>Deskripsi</th>
+            <th>Tanggal</th>
+            <th>Kategori</th>
+          </tr>
+        </thead>
+        <tbody id="pemasukanBody">
+          <!-- Data pemasukan akan dimuat oleh JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Tabel Pengeluaran -->
+  <section class="form-container">
+    <h2 class="form-title" style="background-color:#f3b400; color:#efefef;">Riwayat Pengeluaran</h2>
+    <div style="overflow-x:auto;">
+      <table id="tabelPengeluaran">
+        <thead class="thead-pengeluaran">
+          <tr>
+            <th>Nominal</th>
+            <th>Deskripsi</th>
+            <th>Tanggal</th>
+            <th>Kategori</th>
+          </tr>
+        </thead>
+        <tbody id="pengeluaranBody">
+          <!-- Data pengeluaran akan dimuat oleh JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Tombol Kembali ke Menu -->
+  <a href="menu.html">
+    <button class="btn-kembali">⬅ Kembali ke Menu</button>
+  </a>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="./scripts/firebase-config.js"></script>
+  <script src="scripts/transaksi.js"></script>
+</body>
+</html>

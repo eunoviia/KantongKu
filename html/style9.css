@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Jost', sans-serif;
+  background: linear-gradient(135deg, #e8f5e9, #ffffff);
+}
+
+.main {
+  width: 350px;
+  height: 500px;
+  background: #337d5c;
+  border-radius: 10px;
+  box-shadow: 5px 20px 50px #949494;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+#chk {
+  display: none;
+}
+
+.signup-form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+label {
+  color: #ffffff;
+  font-size: 2.3em;
+  justify-content: center;
+  display: flex;
+  margin: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .5s ease-in-out;
+}
+
+input {
+  width: 60%;
+  background: #e0f2f1;
+  display: flex;
+  margin: 20px auto;
+  padding: 12px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+button {
+  width: 60%;
+  height: 40px;
+  margin: 30px auto 10px;
+  display: block;
+  color: #fff;
+  background:#6abf99;
+  font-size: 1em;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: .2s ease-in;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #46b44a; /* Hijau lebih terang saat hover */
+}
+
+
+
+
+/* login-form */
+.login-form {
+  height: 460px;
+  background: #ffffff;
+  border-radius: 60% / 10%;
+  transform: translateY(-180px);
+  transition: .8s ease-in-out;
+}
+
+.login-form label {
+  color: #2e7d32; /* Hijau tua untuk label login */
+  transform: scale(.6);
+}
+
+#chk:checked ~ .login-form {
+  transform: translateY(-500px);
+}
+
+#chk:checked ~ .login-form label {
+  transform: scale(1);
+}
+
+#chk:checked ~ .signup-form label {
+  transform: scale(.6);
+}
+
+span {
+  color: #363636;
+}

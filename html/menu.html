@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <title>KantongKu - Dashboard</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.5;
+}
+
+    .navbar {
+      background: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+}
+
+.navbar-left h1 {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-right a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-right a:hover {
+  color: #4F7351;
+}
+
+.btn-logout {
+  background-color: #4F7351;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-right a:hover {
+  color: #3c8c66;}
+/* Ringkasan saldo, pemasukan, pengeluaran */
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 20px 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 150px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 1.1em;
+  border: 2px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+
+.card:hover {
+  border-color: #3c8c66;
+  box-shadow: 0 6px 12px rgba(60, 140, 102, 0.25);
+  background-color: white;
+  color: inherit;
+}
+
+
+
+/* Bagian chart dan filter */
+.chart-section {
+  text-align: center;
+  margin: 30px 20px;
+}
+
+.chart-section label {
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.chart-section select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.tampilkan-filter {
+  background-color: #4F7351;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.tampilkan-filter:hover {
+  background-color: #3c5a3d;
+}
+
+#pieChart {
+  max-width: 280px;
+  max-height: 280px;
+  width: 100%;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+}
+
+#loading {
+  margin: 10px 0;
+  color: gray;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+/* Tombol tambah pemasukan & pengeluaran */
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-size: 1em;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.btn-income {
+  background-color: #8CCF9F;
+  color: #1C3B29;
+}
+
+.btn-income:hover {
+  background-color: #75bd8a;
+  transform: scale(1.05);
+}
+
+.btn-expense {
+  background-color: #F7D488;
+  color: #5A4500;
+}
+
+.btn-expense:hover {
+  background-color: #f5c45f;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .summary {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .card {
+    min-width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+</style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <img src="../image/Logo1.png" alt="Logo" class="logo">
+      <h1 id="greeting">Halo, user!</h1>
+    </div>
+    <nav class="navbar-right">
+      <a href="menu.html">Home</a>
+      <a href="transaksi.html">Transaksi</a>
+      <a href="statistik.html">Statistik</a>
+      <a href="homecitacita.html">Cita-cita</a>
+      <button class="btn-logout">Keluar</button>
+    </nav>
+  </header>
+
+<div id="alertContainer" class="container mt-3" style="display: none;">
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" id="pengeluaranAlert">
+    <strong>Perhatian!</strong> Pengeluaran kamu melebihi pemasukan bulan ini.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+
+
+  <!-- Ringkasan -->
+  <section class="summary">
+    <div class="card"><b>Saldo</b><br><span id="saldo">Rp 0</span></div>
+    <div class="card"><b>Pemasukan</b><br><span id="pemasukan">Rp 0</span></div>
+    <div class="card"><b>Pengeluaran</b><br><span id="pengeluaran">Rp 0</span></div>
+  </section>
+
+  <!-- Chart & Filter -->
+  <section class="chart-section">
+    <div style="margin-bottom: 15px;">
+      <label for="bulanSelect">Bulan: </label>
+      <select id="bulanSelect"></select>
+      <label for="tahunSelect">Tahun: </label>
+      <select id="tahunSelect"></select>
+     <button class="tampilkan-filter">Tampilkan</button>
+    </div>
+
+    <h2 id="judulChart">Distribusi Pengeluaran</h2>
+    <div id="loading" style="display:none;">Memuat data...</div>
+    <canvas id="pieChart"></canvas>
+
+    <div class="buttons">
+      <button class="btn btn-income" onclick="tambahPemasukan()">Tambah Pemasukan +</button>
+      <button class="btn btn-expense" onclick="tambahPengeluaran()">Tambah Pengeluaran +</button>
+    </div>
+  </section>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./scripts/firebase-config.js"></script>
+  <script src="./scripts/menu-script.js"></script>
+
+  <!-- Inisialisasi Bulan & Tahun -->
+ <script>
+  const bulanSelect = document.getElementById("bulanSelect");
+  const tahunSelect = document.getElementById("tahunSelect");
+  const bulanSekarang = new Date().getMonth() + 1;
+  
+  // Isi dropdown bulan tetap sama
+  for (let i = 1; i <= 12; i++) {
+    const option = document.createElement("option");
+    option.value = i.toString().padStart(2, '0');
+    option.textContent = new Date(2000, i - 1).toLocaleString("id-ID", { month: "long" });
+    if (i === bulanSekarang) option.selected = true;
+    bulanSelect.appendChild(option);
+  }
+
+  // Fungsi isi dropdown tahun dari 2020 sampai 2030
+  function isiDropdownTahun() {
+    const tahunMulai = 2020;
+    const tahunAkhir = 2030;
+    tahunSelect.innerHTML = "";
+    for (let t = tahunMulai; t <= tahunAkhir; t++) {
+      const option = document.createElement("option");
+      option.value = t;
+      option.textContent = t;
+      tahunSelect.appendChild(option);
+    }
+    // Set default tahun sekarang kalau di range
+    const tahunSekarang = new Date().getFullYear();
+    if (tahunSekarang >= tahunMulai && tahunSekarang <= tahunAkhir) {
+      tahunSelect.value = tahunSekarang;
+    } else {
+      tahunSelect.value = tahunMulai;
+    }
+  }
+
+  isiDropdownTahun();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <title>KantongKu - Login</title>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style9.css">
+
+  <style>
+  header {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    position: fixed; /* Tetap di atas saat scroll */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo img {
+    width: 40px;
+    margin-left: 10px;
+  }
+
+  .logo span {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: black;
+    margin-left: 10px;
+  }
+
+  .main {
+    margin-top: 80px;
+  }
+</style>
+
+</head>
+<body>
+  <header>
+<div class="logo">
+      <img src="../image/Logo1.png" alt="KantongKu Logo">
+      <span>KantongKu</span>
+    </div>
+  </header>
+
+  
+  <!-- Main Form Container -->
+  <div class="main">  	
+    <input type="checkbox" id="chk" aria-hidden="true">
+    
+    <!-- Sign Up Form -->
+    <div class="signup-form">
+      <form>
+        <label for="chk" aria-hidden="true">Sign up</label>
+        <input type="text" name="txt" placeholder="User name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="pswd" placeholder="Password" required>
+        <button type="submit">Sign up</button>
+      </form>
+    </div>
+
+    <!-- Login Form -->
+    <div class="login-form">
+      <form>
+        <label for="chk" aria-hidden="true">Login</label>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="pswd" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div> 
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-database-compat.js"></script>
+
+  <!-- 1) Konfig & inisialisasi Firebase -->
+  <script src="./scripts/firebase-config.js"></script>
+
+  <!-- 2) Logic signup & login -->
+  <script src="./scripts/script.js"></script>
+
+</body>
+</html>
