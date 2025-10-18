@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KantongKu - Catat Semua Transaksimu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 20px 40px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 40px;
+      margin-right: 10px;
+    }
+
+    .logo span {
+      font-size: 1.6em;
+      font-weight: bold;
+    }
+
+    main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 80px 100px;
+      gap: 60px;
+    }
+
+    .content {
+      max-width: 50%;
+    }
+
+ .content h1 {
+  font-size: 4.0em; 
+  font-weight: 900px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.content p {
+  font-size: 1.4em; 
+  margin-bottom: 40px;
+  color: black;
+}
+
+.buttons button {
+  font-size: 1.3em; 
+  padding: 18px 40px; 
+  border: none;
+  border-radius: 16px;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+    .btn-daftar {
+      background-color: #2e7d32;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-daftar:hover {
+      background-color:  #205723;
+      transform: translateY(-2px);
+    }
+
+    .btn-masuk {
+      background-color: white;
+      color: #2e7d32;
+      border: 2px solid #2e7d32;
+      box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1);
+    }
+
+    .btn-masuk:hover {
+      background-color: #e8f5e9;
+      transform: translateY(-2px);
+    }
+
+    .illustration {
+      position: relative;
+      z-index: 0;
+    }
+
+    .illustration::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, #64da68 0%, transparent 70%);
+      border-radius: 50%;
+      transition: 0.3s ease;
+    }
+
+    .illustration:hover::before {
+      background: radial-gradient(circle, #b8e0ba 0%, transparent 70%);
+    }
+
+    .illustration img {
+      max-width: 400px;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .content, .illustration {
+        max-width: 100%;
+      }
+
+      .illustration img {
+        width: 70%;
+        margin-top: 30px;
+      }
+
+      .buttons button {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+      }
+    }
+    @keyframes swing {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.illustration img {
+  max-width: 400px;
+  animation: swing 2s ease-in-out infinite;
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.content h1 {
+  font-size: 4.0em;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-style: italic;
+  opacity: 0;
+  animation: fadeSlideIn 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.content p {
+  font-size: 1.4em;
+  margin-bottom: 40px;
+  color: black;
+  opacity: 0;
+  animation: fadeSlideIn 0.8s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+.buttons button:first-child {
+  opacity: 0;
+  animation: fadeSlideIn 0.8s ease-out forwards;
+  animation-delay: 1s;
+}
+
+.buttons button:last-child {
+  opacity: 0;
+  animation: fadeSlideIn 0.8s ease-out forwards;
+  animation-delay: 1.3s;
+}
+
+
+    
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="../image/Logo1.png" alt="KantongKu Logo">
+      <span>KantongKu</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="content">
+      <h1><em>Catat Semua Transaksimu Disini</em></h1>
+      <p>Lacak semua pemasukan, pengeluaran, dan target tabungan.</p>
+      <div class="buttons">
+        <button class="btn-daftar" onclick="window.location.href='login.html'">Daftar</button>
+        <button class="btn-masuk" onclick="window.location.href='login.html'">Masuk</button>
+      </div>
+    </div>
+    <div class="illustration">
+      <img src="../image/Logo2.png" alt="Kanguru KantongKu">
+    </div>
+  </main>
+</body>
+
+<!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="./scripts/firebase-config.js"></script>
+  <script src="scripts/home.js"></script>
+</body>
+</html>
